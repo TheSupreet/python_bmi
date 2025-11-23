@@ -1,0 +1,231 @@
+/* card / page-card (white solid) */
+
+.page-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  border: 1px solid #d8d8d8;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* titles inside cards */
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+.card-sub {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* forms */
+.page-form,
+.page-card .page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 600;
+}
+input,
+select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+}
+
+/* buttons */
+.button-primary {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.button-secondary {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* helper and outputs */
+.helper-text {
+  font-size: 13px;
+  color: #6f6f6f;
+}
+.output-box {
+  margin-top: 10px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+.output-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.success-text {
+  color: #2e7d32;
+}
+.error-text {
+  color: #d32f2f;
+}
+
+/* Update the main title typography */
+
+.title-block {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.main-title {
+  font-size: 38px;
+
+  font-weight: 800;
+
+  color: #1a237e; /* Deep Indigo for a professional look */
+
+  margin-bottom: 4px;
+}
+
+.main-subtitle {
+  font-size: 16px;
+
+  color: #5c6bc0; /* Lighter Indigo */
+
+  font-weight: 500;
+}
+
+/* Redefine card for the hero section to be wider and hold the image */
+
+.hero-card {
+  display: flex;
+
+  flex-direction: row; /* Layout content horizontally */
+
+  align-items: center;
+
+  max-width: 900px;
+
+  margin: 0 auto; /* Center the hero card */
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  padding: 30px;
+
+  border: 1px solid #d8d8d8;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 50%;
+
+  max-width: 400px;
+
+  height: auto;
+
+  border-radius: 12px;
+
+  object-fit: cover;
+
+  margin-right: 30px;
+}
+
+.hero-content {
+  width: 50%;
+
+  padding-left: 10px;
+}
+
+.hero-title {
+  font-size: 24px;
+
+  font-weight: 700;
+
+  color: #111;
+
+  margin-bottom: 10px;
+}
+
+.hero-description {
+  color: #555;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  margin-bottom: 25px;
+}
+
+/* Custom Warning Color for BMI Category */
+
+:root {
+  /* Existing variables... */
+
+  --warning: #ff9800; /* New variable for warning/overweight */
+}
+
+/* Dashboard Specific Styles */
+
+.field-set {
+  margin-bottom: 20px;
+}
+
+/* Output Box Title */
+
+.output-title {
+  font-weight: 700;
+
+  color: #1a237e; /* Using a darker accent for the title */
+
+  margin-bottom: 8px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #eef3ff;
+}
+
+/* BMI Category Colors (using utility classes) */
+
+.warning {
+  color: var(--warning);
+
+  font-weight: 700 !important;
+}
+
+.success {
+  color: var(--success);
+
+  font-weight: 700 !important;
+}
+
+.error {
+  color: var(--danger);
+
+  font-weight: 700 !important;
+}

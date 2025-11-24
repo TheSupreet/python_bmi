@@ -33,7 +33,7 @@ A complete Body Mass Index (BMI) assessment system with:
 ---
 
 ## 📁 Project Structure
-
+```
 BMI_Assessment/
 │
 ├── backend/
@@ -53,7 +53,7 @@ BMI_Assessment/
 │ ├── index.css
 │ └── page.css
 └── package.json
-
+```
 ---
 
 ## ⚙️ Installation & Setup

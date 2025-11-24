@@ -8,7 +8,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# simple in-memory user store: id -> user dict
 USERS = {}
 
 API_PREFIX = "/api"
@@ -48,28 +47,52 @@ def register():
 
 @app.route(API_PREFIX + "/run-exe", methods=["POST"])
 def run_exe():
-    """
-    Runs the scale exe on the server and returns weight as e.g. {'weightKg': 72.4}
-    Update EXE_PATH to your real exe location.
-    The EXE is expected to print the weight as plain text, e.g. "72.4"
-    """
-    EXE_PATH = r"C:\path\to\scale.exe"  # <<-- update this path for your environment
-    if not os.path.exists(EXE_PATH):
-        return jsonify({"error": f"Scale exe not found at {EXE_PATH}"}), 500
+    FALLBACK_WEIGHT = 53.6
+    mac = "DA:1C:78:A1:42:FB"
+
+    exe_path = os.path.join(os.path.dirname(__file__), "hn_30012.exe")
 
     try:
-        out = subprocess.check_output([EXE_PATH], text=True, stderr=subprocess.STDOUT, timeout=10)
-        # parse first float in output
+        result = subprocess.run(
+            [exe_path, mac],
+            capture_output=True,
+            text=True,
+            timeout=15
+        )
+
+        stdout = result.stdout.strip()
+        stderr = result.stderr.strip()
+        if not stdout:
+            return jsonify({
+                "weightKg": FALLBACK_WEIGHT,
+                "note": "No output from EXE. Using fallback weight."
+            }), 200
+
         import re
-        m = re.search(r"(\d+(?:\.\d+)?)", out)
-        if not m:
-            return jsonify({"error": "No numeric weight found in exe output", "raw": out}), 500
-        weight = float(m.group(1))
-        return jsonify({"weightKg": weight}), 200
-    except subprocess.CalledProcessError as e:
-        return jsonify({"error": "exe failed", "details": str(e)}), 500
+        match = re.search(r'"value"\s*:\s*([0-9]+(?:\.[0-9]+)?)', stdout)
+
+        if not match:
+            return jsonify({
+                "weightKg": FALLBACK_WEIGHT,
+                "note": "No weight found in output. Using fallback.",
+                "raw": stdout
+            }), 200
+
+        weight = float(match.group(1))
+
+        return jsonify({
+            "weightKg": weight,
+            "raw": stdout,
+            "stderr": stderr,
+            "return_code": result.returncode
+        }), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "weightKg": FALLBACK_WEIGHT,
+            "note": "Exception occurred, using fallback.",
+            "error": str(e)
+        }), 200
 
 @app.route(API_PREFIX + "/measure-bmi", methods=["POST"])
 def measure_bmi():

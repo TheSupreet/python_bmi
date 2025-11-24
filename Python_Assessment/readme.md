@@ -73,3 +73,5 @@ cd frontend
 npm install
 npm install react-router-dom
 ```
+
+video link : https://drive.google.com/file/d/1CTjRWhFMJQ6BEvPKQH-PfVLx_Gk6mrFO/view?usp=drivesdk
